@@ -13,20 +13,65 @@ public class Main
 {
     public static void main(String[] args)
     {
+        // Scanner
+        Scanner keyboardInput = new Scanner(System.in);
+
         // Number of games played
-        int gamesPlayed = 2;
+        int gamesPlayed = 0;
 
         // Number of players per game
-        int teamSize = 3;
+        int teamSize = 0;
+
+        // Validate teamSize
+        boolean teamFlag = false;
+        while (!teamFlag)
+        {
+            try
+            {
+                System.out.print("Please enter the number of players: ");
+                teamSize = keyboardInput.nextInt();
+                teamFlag = true;
+                keyboardInput.nextLine();
+            }
+            catch (InputMismatchException inputE)
+            {
+                System.out.println("Error: You must enter a valid integer number");
+                keyboardInput.nextLine();
+                teamFlag = false;
+            }
+        }
 
         // String holding the names of the players
-        String[] players = {"Raje", "Angus", "Tom"};
+        String[] players = new String[teamSize];
+
+        for (int i = 0; i < teamSize; i++)
+        {
+            System.out.print("Please enter the name of Player #" + (i + 1) + ": ");
+            players[i] = keyboardInput.nextLine();
+        }
+
+        // Validate gamesPlayed
+        boolean gamesFlag = false;
+        while (!gamesFlag)
+        {
+            try
+            {
+                System.out.print("Please enter the number of games played: ");
+                gamesPlayed = keyboardInput.nextInt();
+                keyboardInput.nextLine();
+                gamesFlag = true;
+
+            }
+            catch (InputMismatchException inputE)
+            {
+                System.out.println("Error: You must enter a valid integer number.");
+                keyboardInput.nextLine();
+                gamesFlag = false;
+            }
+        }
 
         // Two-Dimensional Array
         int [][] scoreboard = new int[teamSize][gamesPlayed];
-
-        // Scanner
-        Scanner keyboardInput = new Scanner(System.in);
 
         // Populate Array with valid data
         for (int y= 0; y < gamesPlayed; y++)
@@ -43,6 +88,7 @@ public class Main
                     try
                     {
                         scoreboard[x][y] = keyboardInput.nextInt();
+                        keyboardInput.nextLine();
                         isValidInput = true;
 
                         // Check Range of Entered Value
@@ -62,7 +108,6 @@ public class Main
                 }
                 while(!isValidInput);
 
-                System.out.println();
             }
         }
 
