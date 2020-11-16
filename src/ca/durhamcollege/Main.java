@@ -17,7 +17,7 @@ public class Main
      *
      * @param input An object of type Scanner
      * @param range The maximum value the integer may have (0 to range)
-     * @return 0 if no positive integer or the integer if it was found to be within the range
+     * @return 0 if no integer, -1 the integer was out range, or the integer if it was found to be within the range
      */
     private static int ValidatePositiveInteger(Scanner input, int range)
     {
@@ -31,7 +31,7 @@ public class Main
             {
                 System.out.println("Invalid input. Value between 0 and " + range + " needed. " +
                         "Please try again.");
-                validInt = 0;
+                validInt = -1;
             }
         }
         else
@@ -55,7 +55,7 @@ public class Main
         int teamSize = 0;
 
         // Validate teamSize
-        while (teamSize == 0)
+        while (teamSize <= 0)
         {
             System.out.print("Please enter the number of players (cannot be zero): ");
             teamSize = ValidatePositiveInteger(keyboardInput, 8);
@@ -72,7 +72,7 @@ public class Main
         }
 
         // Validate gamesPlayed
-        while (gamesPlayed == 0)
+        while (gamesPlayed <= 0)
         {
             System.out.print("Please enter the number of games played (cannot be zero): ");
             gamesPlayed = ValidatePositiveInteger(keyboardInput, Integer.MAX_VALUE);
@@ -91,7 +91,7 @@ public class Main
                     System.out.print("Please enter " + players[x] + "'s score for game #" + (y + 1) + ": ");
                     scoreboard[x][y] = ValidatePositiveInteger(keyboardInput, 300);
                 }
-                while(scoreboard[x][y] == 0);
+                while(scoreboard[x][y] < 0);
             }
         }
 
