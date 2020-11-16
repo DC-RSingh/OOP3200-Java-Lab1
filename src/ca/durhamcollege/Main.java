@@ -6,11 +6,43 @@
  */
 package ca.durhamcollege;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main
 {
+    /**
+     * Checks if a scanner's next token is an integer and returns it if the check was successful.
+     *
+     * Outputs error messages to System.out if invalid input was entered (out of range or not an int).
+     *
+     * @param input An object of type Scanner
+     * @param range The maximum value the integer may have (0 to range)
+     * @return 0 if no positive integer or the integer if it was found to be within the range
+     */
+    private static int ValidatePositiveInteger(Scanner input, int range)
+    {
+        int validInt = 0;
+
+        if (input.hasNextInt())
+        {
+            validInt = input.nextInt();
+
+            if (validInt < 0 || validInt > range)
+            {
+                System.out.println("Invalid input. Value between 0 and " + range + " needed. " +
+                        "Please try again.");
+                validInt = 0;
+            }
+        }
+        else
+        {
+            System.out.println("Error: You must enter a valid integer number");
+        }
+        input.nextLine();
+
+        return validInt;
+    }
+
     public static void main(String[] args)
     {
         // Scanner
@@ -23,27 +55,16 @@ public class Main
         int teamSize = 0;
 
         // Validate teamSize
-        boolean teamFlag = false;
-        while (!teamFlag)
+        while (teamSize == 0)
         {
-            try
-            {
-                System.out.print("Please enter the number of players: ");
-                teamSize = keyboardInput.nextInt();
-                teamFlag = true;
-                keyboardInput.nextLine();
-            }
-            catch (InputMismatchException inputE)
-            {
-                System.out.println("Error: You must enter a valid integer number");
-                keyboardInput.nextLine();
-                teamFlag = false;
-            }
+            System.out.print("Please enter the number of players: ");
+            teamSize = ValidatePositiveInteger(keyboardInput, 8);
         }
 
         // String holding the names of the players
         String[] players = new String[teamSize];
 
+        // Prompt user to enter the names of the users
         for (int i = 0; i < teamSize; i++)
         {
             System.out.print("Please enter the name of Player #" + (i + 1) + ": ");
@@ -51,23 +72,10 @@ public class Main
         }
 
         // Validate gamesPlayed
-        boolean gamesFlag = false;
-        while (!gamesFlag)
+        while (gamesPlayed == 0)
         {
-            try
-            {
-                System.out.print("Please enter the number of games played: ");
-                gamesPlayed = keyboardInput.nextInt();
-                keyboardInput.nextLine();
-                gamesFlag = true;
-
-            }
-            catch (InputMismatchException inputE)
-            {
-                System.out.println("Error: You must enter a valid integer number.");
-                keyboardInput.nextLine();
-                gamesFlag = false;
-            }
+            System.out.print("Please enter the number of games played (cannot be zero): ");
+            gamesPlayed = ValidatePositiveInteger(keyboardInput, Integer.MAX_VALUE);
         }
 
         // Two-Dimensional Array
@@ -78,36 +86,12 @@ public class Main
         {
             for (int x = 0; x < teamSize; x++)
             {
-                boolean isValidInput = false;
-
                 do
                 {
                     System.out.print("Please enter " + players[x] + "'s score for game #" + (y + 1) + ": ");
-
-                    // Try Catch for InputMisMatchException
-                    try
-                    {
-                        scoreboard[x][y] = keyboardInput.nextInt();
-                        keyboardInput.nextLine();
-                        isValidInput = true;
-
-                        // Check Range of Entered Value
-                        if ((scoreboard[x][y] <= 0) || (scoreboard[x][y] > 300))
-                        {
-                            System.out.println("Invalid input. Value between 0 and 300 needed. Please try again.");
-                            keyboardInput.nextLine();
-                            isValidInput = false;
-                        }
-                    }
-                    catch (InputMismatchException inputMismatchException)
-                    {
-                        System.out.println("Invalid input. Numeric value needed. Please try again.");
-                        keyboardInput.nextLine();
-                        isValidInput = false;
-                    }
+                    scoreboard[x][y] = ValidatePositiveInteger(keyboardInput, 300);
                 }
-                while(!isValidInput);
-
+                while(scoreboard[x][y] == 0);
             }
         }
 
