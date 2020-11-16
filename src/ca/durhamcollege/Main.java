@@ -1,8 +1,8 @@
 /** OOP3200. F2020. Main.java
  *	@author		Raje Singh, Angus Wai
  *	@studentIDs	100776793 & 100719558
- *	@version	2020.10
- *	@date		October 8, 2020
+ *	@version	2020.11
+ *	@date		November 15, 2020
  */
 package ca.durhamcollege;
 
@@ -23,10 +23,13 @@ public class Main
     {
         int validInt = 0;
 
+        // Check if Scanner next token is int
         if (input.hasNextInt())
         {
+            // Set the integer from the Scanner
             validInt = input.nextInt();
 
+            // Check if the integer is within range
             if (validInt < 0 || validInt > range)
             {
                 System.out.println("Invalid input. Value between 0 and " + range + " needed. " +
@@ -38,6 +41,7 @@ public class Main
         {
             System.out.println("Error: You must enter a valid integer number");
         }
+        // Clear the Scanner's current line
         input.nextLine();
 
         return validInt;
