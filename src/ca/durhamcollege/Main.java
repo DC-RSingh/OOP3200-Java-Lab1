@@ -38,11 +38,14 @@ public class Main
                 do
                 {
                     System.out.print("Please enter " + players[x] + "'s score for game #" + (y + 1) + ": ");
+
+                    // Try Catch for InputMisMatchException
                     try
                     {
                         scoreboard[x][y] = keyboardInput.nextInt();
                         isValidInput = true;
 
+                        // Check Range of Entered Value
                         if ((scoreboard[x][y] <= 0) || (scoreboard[x][y] > 300))
                         {
                             System.out.println("Invalid input. Value between 0 and 300 needed. Please try again.");
@@ -63,5 +66,18 @@ public class Main
             }
         }
 
+        // Output Scoreboard Information
+        for (int x = 0; x < teamSize; x++)
+        {
+            float average = 0f;
+            System.out.println("Score details for " + players[x] + ":");
+            for (int y= 0; y < gamesPlayed; y++)
+            {
+                System.out.println("Game #" + (y + 1) + ": " + scoreboard[x][y]);
+                average += (float)scoreboard[x][y];
+            }
+            average /= (float)gamesPlayed;
+            System.out.println("Average for " + players[x] + ": " + average + "\n");
+        }
     }
 }
