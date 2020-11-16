@@ -17,11 +17,11 @@ public class Main
      *
      * @param input An object of type Scanner
      * @param range The maximum value the integer may have (0 to range)
-     * @return 0 if no integer, -1 the integer was out range, or the integer if it was found to be within the range
+     * @return -1 if no integer or the integer was out range, or the integer if it was found to be within the range
      */
     private static int ValidatePositiveInteger(Scanner input, int range)
     {
-        int validInt = 0;
+        int validInt = -1;
 
         // Check if Scanner next token is int
         if (input.hasNextInt())
@@ -98,6 +98,9 @@ public class Main
                 while(scoreboard[x][y] < 0);
             }
         }
+
+        // Add Extra Line to output
+        System.out.println();
 
         // Output Scoreboard Information
         for (int x = 0; x < teamSize; x++)
