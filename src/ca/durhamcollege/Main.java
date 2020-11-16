@@ -59,6 +59,10 @@ public class Main
         {
             System.out.print("Please enter the number of players: ");
             teamSize = ValidatePositiveInteger(keyboardInput, 8);
+            if (teamSize == 0)
+            {
+                System.out.println("Invalid input. Value cannot be zero");
+            }
         }
 
         // String holding the names of the players
@@ -76,6 +80,10 @@ public class Main
         {
             System.out.print("Please enter the number of games played (cannot be zero): ");
             gamesPlayed = ValidatePositiveInteger(keyboardInput, Integer.MAX_VALUE);
+            if (teamSize == 0)
+            {
+                System.out.println("Invalid input. Value cannot be zero");
+            }
         }
 
         // Two-Dimensional Array
